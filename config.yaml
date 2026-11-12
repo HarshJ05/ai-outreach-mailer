@@ -1,0 +1,70 @@
+# =====================================================================
+#  AI Outreach Mailer: configuration
+#  Change the `company` and `campaign` sections for your business.
+#  A filled-in example is in examples/northwind-ads.yaml
+#  (run with: python -m src.main --config examples/northwind-ads.yaml ...)
+# =====================================================================
+
+company:
+  name: "Acme Growth"
+  website: "https://example.com"
+  # One line describing what you do. The AI uses it to write the email.
+  what_we_do: "a marketing platform that helps small businesses get more customers from online ads"
+  sender_name: "Your Name"
+  sender_title: "Team Acme Growth"
+
+campaign:
+  # "Already sent" is tracked per campaign name. Change it for every new campaign.
+  name: "launch_offer"
+  # Fallback subject (the AI writes its own, usually echoing the hook)
+  subject: "Spend ₹10K on ads, make ₹1.4L back"
+  # The attention-grabbing opener
+  hook: "₹10K in ads. ₹1.4L in revenue. 3 days."
+  # How the hook must be framed (keeps claims honest)
+  proof: "That's one client's reported result."
+  # How it works, in one line (leave "" to skip)
+  steps: "research competitor ads, launch your campaign, optimise 24/7"
+  # The offer
+  offer: "Get the Starter Plan for ₹2,000 instead of ₹4,999 for your first month."
+  bonus: "We'll set up your first campaign FREE!"   # leave "" to skip
+  discount_code: "WELCOME50"                        # leave "" if none
+  cta_link: "https://example.com/#pricing"
+  closing: "Let's get you more customers!"
+  # Extra rules for the AI (tone, words to avoid, language, etc.)
+  extra_instructions: ""
+
+segments:
+  # Rows with segment = "existing" (or "lapsed") AND a personal link get this line.
+  # Use {link} where the person's own link should go.
+  existing_line: "Your account got disconnected. Reconnect in 1 minute: {link}"
+  # Words that must NEVER appear in emails to new (cold) leads.
+  cold_forbidden_words: ["disconnected", "reconnect", "your account"]
+
+ai:
+  # Tried in this order for every email. A rate-limited provider cools down
+  # and traffic moves to the next one. Template is used if all fail.
+  provider_order: [gemini, grok]
+  # Model names change often. `python -m src.main --list-models` shows what your keys can use.
+  gemini_model: "gemini-flash-latest"
+  grok_model: "grok-4-latest"
+  temperature: 0.7
+  timeout_seconds: 40
+  max_retries_per_provider: 2
+  cooldown_seconds: 60
+
+sending:
+  emails_per_minute: 10
+  daily_cap: 400            # Gmail ~500/day, Google Workspace ~2000/day. Stay under.
+  jitter_seconds: [2, 6]    # random extra pause between emails
+  max_send_retries: 3
+
+columns:
+  # Spreadsheet header aliases (matching ignores case, spaces, _ and -).
+  email: ["email", "email id", "emailid", "mail", "mail id", "e-mail", "email address"]
+  first_name: ["first name", "firstname", "fname"]
+  full_name: ["name", "full name", "fullname", "customer name", "contact name"]
+  company: ["company", "business", "brand", "store name", "company name", "business name"]
+  industry: ["industry", "category", "niche", "business type"]
+  city: ["city", "location", "town"]
+  segment: ["segment", "type", "customer type"]
+  personal_link: ["personal link", "reconnect link", "reconnect url", "reconnect_link", "account link"]

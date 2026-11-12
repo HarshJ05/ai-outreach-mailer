@@ -1,0 +1,51 @@
+# Example preset: Northwind Ads, a fictional AI ads platform (demo data only).
+# Use with: python -m src.main --config examples/northwind-ads.yaml --file data/recipients.example.xlsx --preview 3
+
+company:
+  name: "Northwind Ads"
+  website: "https://example.com"
+  what_we_do: "an AI ads platform that researches competitor ads, launches campaigns, and optimises them 24/7"
+  sender_name: "Riya Kapoor"
+  sender_title: "Team Northwind Ads"
+
+campaign:
+  name: "starter_offer"
+  subject: "₹10K in ads. ₹1.4L in revenue. 3 days."
+  hook: "₹10K in ads. ₹1.4L in revenue. 3 days."
+  proof: "One Northwind Ads client's reported result."
+  steps: "research competitor ads, launch your campaign, optimise 24/7"
+  offer: "Get the Starter Plan for ₹2,000 instead of ₹4,999 for your first month."
+  bonus: "We'll set up your first campaign FREE!"
+  discount_code: "NORTHWIND50"
+  cta_link: "https://example.com/#pricing"
+  closing: "Let's get you more customers!"
+  extra_instructions: ""
+
+segments:
+  existing_line: "Your ad account got disconnected. Reconnect in 1 minute: {link}"
+  cold_forbidden_words: ["disconnected", "reconnect", "your account", "your ad account"]
+
+ai:
+  provider_order: [gemini, grok]
+  gemini_model: "gemini-flash-latest"
+  grok_model: "grok-4-latest"
+  temperature: 0.7
+  timeout_seconds: 40
+  max_retries_per_provider: 2
+  cooldown_seconds: 60
+
+sending:
+  emails_per_minute: 10
+  daily_cap: 400
+  jitter_seconds: [2, 6]
+  max_send_retries: 3
+
+columns:
+  email: ["email", "email id", "emailid", "mail", "mail id", "e-mail", "email address"]
+  first_name: ["first name", "firstname", "fname"]
+  full_name: ["name", "full name", "fullname", "customer name", "contact name"]
+  company: ["company", "business", "brand", "store name", "company name", "business name"]
+  industry: ["industry", "category", "niche", "business type"]
+  city: ["city", "location", "town"]
+  segment: ["segment", "type", "customer type"]
+  personal_link: ["personal link", "reconnect link", "reconnect url", "reconnect_link", "account link"]

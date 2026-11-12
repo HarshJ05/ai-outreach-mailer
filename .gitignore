@@ -1,0 +1,34 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# real customer data and logs must never reach GitHub
+data/*
+!data/.gitkeep
+!data/recipients.example.xlsx
+logs/*
+!logs/.gitkeep
+
+# personal / client configs kept only on this machine
+private/
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

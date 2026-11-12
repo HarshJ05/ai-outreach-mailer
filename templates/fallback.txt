@@ -1,0 +1,18 @@
+Subject: {{ subject }}
+
+Hi {{ first_name }},
+
+{{ hook }}
+{{ proof }}
+
+{% if steps %}Here's how it works: {{ steps }}.
+
+{% endif %}{% if existing_line %}{{ existing_line }}
+
+{% endif %}{% if recipient_company and not existing_line %}Want this working for {{ recipient_company }}? {% endif %}{{ offer }}
+
+{% if bonus %}{{ bonus }}
+
+{% endif %}{{ cta_line }}
+
+{{ closing }}
